@@ -4,6 +4,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -19,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCheckboxModule,
     MatRadioModule,
     MatFormFieldModule,
+    MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
@@ -31,9 +33,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   exports: [
     MatBadgeModule,
     MatCheckboxModule,
-    MatFormFieldModule,
     MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
     MatDialogModule,
     MatPaginatorModule,
     MatProgressBarModule,
