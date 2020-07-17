@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  aws: {
+    region: 'ap-northeast-1',
+    userPoolId: 'ap-northeast-1_NZL25qkFw', // User Pools の画面から取得できる User Pools ID。
+    clientId: '3ugracmfnno0i43lp7g7th8hfe',  // User Pools で発行したクライアントアプリケーションのID。
+  }
 };
 
 /*
