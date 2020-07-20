@@ -1,3 +1,5 @@
+import { LoginGuard } from './guard/login.guard';
+import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +8,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'home', component: HomeComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'home', component: HomeComponent, canActivate:[LoginGuard] },
   { path: 'login', component: LoginComponent }
 ];
 
