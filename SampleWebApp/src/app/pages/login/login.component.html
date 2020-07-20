@@ -1,55 +1,59 @@
-<div class="login-panel">
+<div class="row">
+    <div class="login-panel col-lg-6 offset-lg-6 col-md-8 offset-md-2 col-12">
 
-    <div class="login-no-account">
-        <p>アカウントをお持ちでない方はこちら</p>
-        <a href="https://www.mercari.com/jp/signup/?after_save_callback=%2Fjp%2F">新規会員登録</a>
-    </div>
+        <div class="login-no-account">
+            <p>アカウントをお持ちでない方はこちら</p>
+            <a href="https://www.mercari.com/jp/signup/?after_save_callback=%2Fjp%2F">新規会員登録</a>
+        </div>
 
-    <!-- <div class="login-form-inner">
+        <!-- <div class="login-form-inner">
+            
+            <button id="google-login" class="btn-default btn-sns btn-sns-google">
+                Googleでログイン
+            </button>
+            <button id="facebook-login" class="btn-default btn-sns btn-sns-facebook">
+                <i class="icon-facebook"></i>
+                Facebookでログイン
+            </button>
+            <button id="apple-login" class="btn-default btn-sns btn-sns-apple">
+                <i class="icon-apple"></i>
+                Appleでログイン
+            </button>
+        </div> -->
 
-        <button id="google-login" class="btn-default btn-sns btn-sns-google">
-            Googleでログイン
-        </button>
-        <button id="facebook-login" class="btn-default btn-sns btn-sns-facebook">
-            <i class="icon-facebook"></i>
-            Facebookでログイン
-        </button>
-        <button id="apple-login" class="btn-default btn-sns btn-sns-apple">
-            <i class="icon-apple"></i>
-            Appleでログイン
-        </button>
-    </div> -->
+        <form [formGroup]="loginInput">
 
-    <form [formGroup]="loginInput">
+            <div class="login-form-inner">
 
-        <div class="login-form-inner">
+                <div class="form-group">
+                    <input type="email" name="email" formControlName="email" placeholder="メールアドレス"
+                        class="login-input-text input-default">
+                </div>
 
-            <div class="form-group">
-                <input type="email" name="email" formControlName="email" placeholder="メールアドレス" class="login-input-text input-default">
-            </div>
+                <div class="form-group">
+                    <input type="password" name="password" formControlName="password" placeholder="パスワード"
+                        class="login-input-text input-default">
+                </div>
 
-            <div class="form-group">
-                <input type="password" name="password" formControlName="password" placeholder="パスワード" class="login-input-text input-default">
-            </div>
-
-            <!-- <div class="form-group">
-                <div class="g-recaptcha login-captcha" data-sitekey="6LfZGCYTAAAAAHoK-s7Lg5OdYg5Fq4susvALmZoc">
-                    <div style="width: 304px; height: 78px;">
-                        <div><iframe
+                <!-- <div class="form-group">
+                    <div class="g-recaptcha login-captcha" data-sitekey="6LfZGCYTAAAAAHoK-s7Lg5OdYg5Fq4susvALmZoc">
+                        <div style="width: 304px; height: 78px;">
+                            <div><iframe
                                 src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LfZGCYTAAAAAHoK-s7Lg5OdYg5Fq4susvALmZoc&amp;co=aHR0cHM6Ly93d3cubWVyY2FyaS5jb206NDQz&amp;hl=ja&amp;v=6uMSoEJtPugDt7Qm0Uu5iuSY&amp;size=normal&amp;cb=pur61v99i5w"
                                 width="304" height="78" role="presentation" name="a-mvjufnnp48x7" frameborder="0"
                                 scrolling="no"
                                 sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-                        </div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                            </div><textarea id="g-recaptcha-response" name="g-recaptcha-response"
                             class="g-recaptcha-response"
                             style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                    </div><iframe style="display: none;"></iframe>
+                        </div><iframe style="display: none;"></iframe>
                 </div>
             </div> -->
 
-            <button type="submit" class="login-submit btn-default btn-red">ログイン</button>
+                <button type="submit" class="login-submit btn-default btn-red">ログイン</button>
 
-            <a href="https://www.mercari.com/jp/password/reset/start/">パスワードをお忘れの方</a>
-        </div>
-    </form>
+                <a href="https://www.mercari.com/jp/password/reset/start/">パスワードをお忘れの方</a>
+            </div>
+        </form>
+    </div>
 </div>
