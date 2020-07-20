@@ -111,6 +111,47 @@ export class CognitoService {
     }
   }
 
+  // メールアドレス属性追加・更新
+  async upsertEmail(email: string) {
+    const emailAttr = {
+      Name: 'email',
+      Value: email
+    };
+    const cognitoUser = this.userPool.getCurrentUser();
+    return new Promise((resolve, reject) => {
+      cognitoUser.getSession((err1, result2) => {
+        if (result2) {
+          cognitoUser.updateAttributes([emailAttr], (err2, result3) => {
+            if (result3) {
+              resolve(result3);
+            } else {
+              reject(err2);
+            }
+          });
+        }
+      });
+    });
+  }
+
+  // メールアドレス検証
+  async verifyEmail(confirmationCode: string) {
+    const cognitoUser = this.userPool.getCurrentUser();
+    return new Promise((resolve, reject) => {
+      cognitoUser.getSession((err1, result2) => {
+        if (result2) {
+          cognitoUser.verifyAttribute('email', confirmationCode, {
+            onSuccess(success) {
+              resolve(success);
+            },
+            onFailure(err2) {
+              reject(err2);
+            }
+          });
+        }
+      });
+    });
+  }
+
   // パスワード変更処理
   async changePassword(oldPw: string, newPw: string) {
     let cognitoUser = this.userPool.getCurrentUser();
@@ -119,12 +160,16 @@ export class CognitoService {
       Pool: this.userPool,
       Storage: localStorage
     };
-    return new Promise<any>((resolve, err) => {
+    return new Promise<any>((resolve, reject) => {
       if (cognitoUser) {
         cognitoUser.getSession((error, result) => {
           if (result) {
             cognitoUser.changePassword(oldPw, newPw, (error2, result2) => {
-              resolve({ result2, error2 });
+              if (result2) {
+                resolve(result2);
+              } else {
+                reject(error2);
+              }
             });
           }
         });
