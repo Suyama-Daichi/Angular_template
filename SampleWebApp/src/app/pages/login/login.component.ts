@@ -14,10 +14,12 @@ export class LoginComponent implements OnInit {
   }
 
   initForm() {
-    this.loginInput = this.fb.group({
-      email: [null, Validators.compose([Validators.required, Validators.email])],
-      password: [null, Validators.required]
-    });
+    this.loginInput = this.fb.group(
+      {
+        email: [null, Validators.compose([Validators.required, Validators.email])],
+        password: [null, Validators.required]
+      }
+    );
   }
 
   ngOnInit(): void {
