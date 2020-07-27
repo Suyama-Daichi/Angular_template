@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { passwordRegExp } from '../../static';
 
 @Component({
   selector: 'app-signup',
@@ -19,11 +20,16 @@ export class SignupComponent implements OnInit {
   initForm() {
     this.signupInput = this.fb.group(
       {
-        userName: [],
-        email: [],
-        password: []
+        userName: [null, Validators.required],
+        email: [null, Validators.compose([Validators.required, Validators.email])],
+        password: [null, Validators.compose([Validators.required, Validators.pattern(passwordRegExp)])]
       }
     );
+  }
+
+  signinSubmit() {
+    alert(this.signupInput);
+    console.log(this.signupInput);
   }
 
 }
