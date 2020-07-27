@@ -10,6 +10,7 @@ import { passwordRegExp } from '../../static';
 export class SignupComponent implements OnInit {
   signupInput: FormGroup;
   isShowpassword: boolean;
+  isSubmited: boolean;
   constructor(private fb: FormBuilder) {
     this.initForm();
   }
@@ -28,7 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   signinSubmit() {
-    alert(this.signupInput);
+    this.isSubmited = true;
     console.log(this.signupInput);
   }
 
