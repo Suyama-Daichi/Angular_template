@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   signupInput: FormGroup;
+  isShowpassword: boolean;
   constructor(private fb: FormBuilder) {
     this.initForm();
   }
