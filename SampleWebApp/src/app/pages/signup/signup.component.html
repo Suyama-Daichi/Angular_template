@@ -16,7 +16,7 @@
                 </div>
                 <div class="row mt-1">
                     <div class="col-10 offset-1 col-md-6 offset-md-3 d-flex justify-content-start">
-                        <input [style.border]="isSubmited && signupInput.get('nickName').errors ? errorBorder : ''" type="text" name="nickname" placeholder="例：田中太郎" class="form-control" formControlName="nickName">
+                        <input [style.border]="isSubmited && signupInput.get('nickName').errors ? statics.errorBorder : ''" type="text" name="nickname" placeholder="例：田中太郎" class="form-control" formControlName="nickName">
                     </div>
                 </div>
                 <div class="row mt-1" [hidden]="!isSubmited || !signupInput.get('nickName').errors?.required">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="row mt-1">
                     <div class="col-10 offset-1 col-md-6 offset-md-3 d-flex justify-content-start">
-                        <input [style.border]="isSubmited && signupInput.get('email').errors ? errorBorder : ''" type="email" name="email" placeholder="PC・携帯どちらでも可" class="form-control" formControlName="email">
+                        <input [style.border]="isSubmited && signupInput.get('email').errors ? statics.errorBorder : ''" type="email" name="email" placeholder="PC・携帯どちらでも可" class="form-control" formControlName="email">
                     </div>
                 </div>
                 <div class="row mt-1" [hidden]="!isSubmited || !signupInput.get('email').errors?.required">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="row mt-1">
                     <div class="col-10 offset-1 col-md-6 offset-md-3 d-flex justify-content-start">
-                        <input [style.border]="isSubmited && signupInput.get('password').errors ? errorBorder : ''" [type]="isShowpassword ? 'text': 'password'" name="password" placeholder="8文字以上の半角英数字"
+                        <input [style.border]="isSubmited && signupInput.get('password').errors ? statics.errorBorder : ''" [type]="isShowpassword ? 'text': 'password'" name="password" placeholder="8文字以上の半角英数字"
                             class="form-control" formControlName="password">
                     </div>
                 </div>

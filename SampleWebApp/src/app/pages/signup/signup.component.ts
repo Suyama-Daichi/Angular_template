@@ -1,3 +1,4 @@
+import { Static } from './../../static';
 import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,10 +13,11 @@ export class SignupComponent implements OnInit {
   signupInput: FormGroup;
   isShowpassword: boolean;
   isSubmited: boolean;
-  errorBorder = 'solid 1px #ea352d';
+  // errorBorder = 'solid 1px #ea352d';
   constructor(
     private fb: FormBuilder,
-    private cognito: CognitoService
+    private cognito: CognitoService,
+    public statics: Static
   ) {
     this.initForm();
   }
@@ -28,7 +30,7 @@ export class SignupComponent implements OnInit {
       {
         nickName: [null, Validators.required],
         email: [null, Validators.compose([Validators.required, Validators.email])],
-        password: [null, Validators.compose([Validators.required, Validators.pattern(passwordRegExp)])]
+        password: [null, Validators.compose([Validators.required, Validators.pattern(this.statics.passwordRegExp)])]
       }
     );
   }
