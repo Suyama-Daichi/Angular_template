@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   aws: {
     region: 'ap-northeast-1',
-    userPoolId: 'ap-northeast-1_NZL25qkFw', // User Pools の画面から取得できる User Pools ID。
-    clientId: '3ugracmfnno0i43lp7g7th8hfe',  // User Pools で発行したクライアントアプリケーションのID。
+    userPoolId: 'ap-northeast-1_16TDcnYcL', // User Pools の画面から取得できる User Pools ID。
+    clientId: '3h5luini2tied3ipla0aph1dc2',  // User Pools で発行したクライアントアプリケーションのID。
   }
 };
 

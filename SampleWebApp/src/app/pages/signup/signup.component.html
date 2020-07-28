@@ -16,10 +16,10 @@
                 </div>
                 <div class="row mt-1">
                     <div class="col-10 offset-1 col-md-6 offset-md-3 d-flex justify-content-start">
-                        <input type="text" name="nickname" placeholder="例：田中太郎" class="form-control" formControlName="userName">
+                        <input type="text" name="nickname" placeholder="例：田中太郎" class="form-control" formControlName="nickName">
                     </div>
                 </div>
-                <div class="row mt-1" [hidden]="!isSubmited || !signupInput.get('userName').errors?.required">
+                <div class="row mt-1" [hidden]="!isSubmited || !signupInput.get('nickName').errors?.required">
                     <div class="col-10 offset-1 col-md-6 offset-md-3 d-flex justify-content-start">
                         <app-error [message]="'ニックネームを入力してください'"></app-error>
                     </div>

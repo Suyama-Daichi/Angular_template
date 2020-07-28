@@ -3,11 +3,11 @@ import {
   CognitoUserPool,
   CognitoUser,
   AuthenticationDetails,
-  CognitoUserAttribute
 } from 'amazon-cognito-identity-js';
 import * as AWS from 'aws-sdk';
 import { environment } from 'src/environments/environment';
 import { StoreService } from './store.service';
+import * as AmazonCognitoIdentity from "amazon-cognito-identity-js";
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +26,12 @@ export class CognitoService {
   }
 
   // サインアップ処理
-  signup(userid: string, password: string, attributes: CognitoUserAttribute[]): Promise<any> {
+  signup(password: string, attributes: { Name: string, Value: any }[]): Promise<any> {
+    let cognitoAttributes: AmazonCognitoIdentity.CognitoUserAttribute[] = [];
+    cognitoAttributes = attributes.map(m => new AmazonCognitoIdentity.CognitoUserAttribute(m));
+    const email = attributes.find(f => f.Name === 'email').Value;
     return new Promise((resolve, reject) => {
-      this.userPool.signUp(userid, password, attributes, null, (err, success) => {
+      this.userPool.signUp(email, password, cognitoAttributes, null, (err, success) => {
         if (success) {
           resolve(success);
         } else if (err) {
