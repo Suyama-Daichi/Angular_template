@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
   signupInput: FormGroup;
   isShowpassword: boolean;
   isSubmited: boolean;
+  errorBorder = 'solid 1px #ea352d';
   constructor(
     private fb: FormBuilder,
     private cognito: CognitoService
