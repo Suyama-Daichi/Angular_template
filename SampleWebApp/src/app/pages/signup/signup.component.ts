@@ -2,6 +2,7 @@ import { Static } from './../../static';
 import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,6 +17,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private cognito: CognitoService,
+    private router: Router,
     public statics: Static
   ) {
     this.initForm();
@@ -42,7 +44,13 @@ export class SignupComponent implements OnInit {
       const attributes = [];
       attributes.push(nickName);
       attributes.push(email);
-      await this.cognito.signup(this.signupInput.get('password').value, attributes);
+      const res = await this.cognito.signup(this.signupInput.get('password').value, attributes)
+        .catch(() => {
+          alert('入力したメールアドレスは使われています');
+        });
+        if (res) {
+          this.router.navigateByUrl('signup/confirm', { state: { email: email.Value } });
+        }
       console.log(this.signupInput);
     }
   }
