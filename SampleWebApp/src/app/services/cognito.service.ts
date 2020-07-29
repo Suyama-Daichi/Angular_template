@@ -187,10 +187,10 @@ export class CognitoService {
   }
 
   // パスワード変更処理
-  async changePassword(oldPw: string, newPw: string) {
+  async changePassword(email: string, oldPw: string, newPw: string) {
     let cognitoUser = this.userPool.getCurrentUser();
     const userData = {
-      Username: this.store.userId,
+      Username: email,
       Pool: this.userPool,
       Storage: localStorage
     };
