@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { CognitoService } from './../../services/cognito.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -9,7 +11,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginInput: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private cognito: CognitoService,
+    private router: Router
+  ) {
     this.initForm();
   }
 
@@ -24,5 +30,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  async loginSubmit() {
+    const res = await this.cognito.login(this.loginInput.get('email').value, this.loginInput.get('password').value)
+      .catch(() => {
+        alert('ログインに失敗しました');
+      });
 
+      if (res) {
+        console.log(res);
+        this.router.navigateByUrl('home');
+      }
+  }
 }

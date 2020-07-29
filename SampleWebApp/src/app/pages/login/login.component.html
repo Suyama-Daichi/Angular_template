@@ -21,7 +21,7 @@
             </button>
         </div> -->
 
-        <form [formGroup]="loginInput">
+        <form [formGroup]="loginInput" (ngSubmit)="loginSubmit()">
 
             <div class="login-form-inner">
 
