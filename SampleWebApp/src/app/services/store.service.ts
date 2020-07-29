@@ -5,6 +5,5 @@ import { Injectable } from '@angular/core';
 })
 export class StoreService {
   session: string;
-  userId: string;
   constructor() { }
 }
