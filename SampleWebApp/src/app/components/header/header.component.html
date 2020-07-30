@@ -1,19 +1,13 @@
-<!-- 参考：https://ziyuss.jp/header-responsive-html/ -->
-
-<header>
-    <div class="container-a">
-        <h1>SampleWebApp</h1>
-        <nav id="Header-Nav" class="header-nav">
-            <a href="" class="nav-list">Link</a>
-            <a href="" class="nav-list">About</a>
-            <a href="" class="nav-list">Profile</a>
-            <a href="" class="nav-list">Contact</a>
-        </nav>
-        <div id="Hamburger" class="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-            <p>MENU</p>
-        </div>
+<nav>
+    <img src="" alt="ロゴ">
+    <a href="">Page1</a>
+    <a href="">Page2</a>
+    <a href="">Page3</a>
+    <a href="">Page4</a>
+    <div class="d-inline" mat-button [matMenuTriggerFor]="menu">
+        ▽
     </div>
-</header>
+    <mat-menu #menu="matMenu">
+        <button (click)="logout()" mat-menu-item>Logout</button>
+    </mat-menu>
+</nav>

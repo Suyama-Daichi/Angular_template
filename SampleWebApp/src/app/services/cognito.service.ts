@@ -227,10 +227,14 @@ export class CognitoService {
 
   // ログアウト処理
   logout() {
-    console.log('LogOut!');
-    const currentUser = this.userPool.getCurrentUser();
-    if (currentUser) {
-      currentUser.signOut();
-    }
+    return new Promise<any>((resolve, reject)=>{
+      const currentUser = this.userPool.getCurrentUser();
+      if (currentUser) {
+        currentUser.signOut();
+        console.log('LogOut!');
+        resolve(true);
+      }
+      reject();
+    });
   }
 }
