@@ -9,12 +9,14 @@ import { MatMenu } from '@angular/material/menu';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  isSmartPhone: boolean;
   constructor(
     private cognito: CognitoService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.isSmartPhone = window.innerWidth < 425;
   }
 
   async logout() {
@@ -23,9 +25,9 @@ export class HeaderComponent implements OnInit {
         console.error('ログアウトに失敗しました')
       });
 
-      if (res) {
-        this.router.navigateByUrl('login')
-      }
+    if (res) {
+      this.router.navigateByUrl('login')
+    }
   }
 
 
