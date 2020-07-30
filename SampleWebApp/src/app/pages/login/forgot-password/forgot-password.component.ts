@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Validators, FormControl } from '@angular/forms';
 import { CognitoService } from 'src/app/services/cognito.service';
-import { Router } from '@angular/router';
 import { Static } from 'src/app/static';
 
 @Component({
@@ -13,23 +12,26 @@ export class ForgotPasswordComponent implements OnInit {
   email: FormControl = new FormControl(null, Validators.compose([Validators.required, Validators.email]));
   isShowpassword: boolean;
   isSubmited: boolean;
-  // errorBorder = 'solid 1px #ea352d';
+  isSendEmail: boolean;
+  isResendEmail: boolean;
   constructor(
     private cognito: CognitoService,
-    private router: Router,
     public statics: Static
   ) { }
 
   ngOnInit(): void { }
 
-  async submit() {
+  async submit(resend: boolean) {
     this.isSubmited = true;
     if (!this.email.invalid) {
       const res = await this.cognito.forgotPassword(this.email.value)
         .catch(() => {
           alert('送信失敗');
         })
-        console.log(res);
+      if (res) {
+        this.isSendEmail = true;
+        this.isResendEmail = resend;
+      }
     }
   }
 
