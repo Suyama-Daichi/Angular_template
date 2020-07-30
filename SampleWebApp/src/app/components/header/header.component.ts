@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CognitoService } from './../../services/cognito.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
@@ -6,15 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  isSmartPhone: boolean;
+  constructor(
+    private cognito: CognitoService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    const hamburger = document.getElementById('Hamburger');
-    const header_nav = document.getElementById('Header-Nav');
-    hamburger.addEventListener('click', function () {
-      header_nav.classList.toggle("active");
-    });
+    this.isSmartPhone = window.innerWidth < 425;
+  }
+
+  async logout() {
+    const res = await this.cognito.logout()
+      .catch(() => {
+        console.error('ログアウトに失敗しました')
+      });
+
+    if (res) {
+      this.router.navigateByUrl('login')
+    }
   }
 
 
