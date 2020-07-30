@@ -237,4 +237,42 @@ export class CognitoService {
       reject();
     });
   }
+
+    // パスワードを忘れた処理
+    forgotPassword(userName: string) {
+      return new Promise<boolean>((resolve, reject) => {
+        const userData = {
+          Username: userName,
+          Pool: this.userPool
+        };
+        const cognitoUser = new CognitoUser(userData);
+        cognitoUser.forgotPassword({
+          onSuccess(success) {
+            resolve(true);
+          },
+          onFailure(error) {
+            reject();
+          }
+        });
+      });
+    }
+  
+    // パスワードを再設定
+    resetPassword(userName: string, verificationCode: string, newPassword: string) {
+      return new Promise((resolve, reject) => {
+        const userData = {
+          Username: userName,
+          Pool: this.userPool,
+        };
+        const cognitoUser = new CognitoUser(userData);
+        cognitoUser.confirmPassword(verificationCode, newPassword, {
+          onSuccess() {
+            resolve();
+          },
+          onFailure(err) {
+            reject(err);
+          }
+        });
+      });
+    }
 }

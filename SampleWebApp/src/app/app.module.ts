@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ForgotPasswordComponent } from './pages/login/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     LoginComponent,
     HeaderComponent,
     FooterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     SharedModule,
