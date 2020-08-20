@@ -19,7 +19,7 @@ FrontDeploy:
     - name: setup Node
         uses: actions/setup-node@v1
         with:
-        node-version: 10.x
+        node-version: 12.x
         registry-url: 'https://registry.npmjs.org'
    - name: Install Dependencies
         run: npm install
