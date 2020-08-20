@@ -12,7 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [],
   imports: [
@@ -28,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
     MatSnackBarModule
   ],
   exports: [
@@ -43,6 +44,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
     MatSnackBarModule
   ]
 })

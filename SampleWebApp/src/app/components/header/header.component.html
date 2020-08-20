@@ -1,19 +1,21 @@
-<!-- 参考：https://ziyuss.jp/header-responsive-html/ -->
-
-<header>
-    <div class="container-a">
-        <h1>SampleWebApp</h1>
-        <nav id="Header-Nav" class="header-nav">
-            <a href="" class="nav-list">Link</a>
-            <a href="" class="nav-list">About</a>
-            <a href="" class="nav-list">Profile</a>
-            <a href="" class="nav-list">Contact</a>
-        </nav>
-        <div id="Hamburger" class="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-            <p>MENU</p>
-        </div>
+<nav class="d-flex justify-content-around">
+    <div>
+        <img src="" alt="ロゴ">
+        <a [hidden]="isSmartPhone" href="">Page1</a>
+        <a [hidden]="isSmartPhone" href="">Page2</a>
+        <a [hidden]="isSmartPhone" href="">Page3</a>
+        <a [hidden]="isSmartPhone" href="">Page4</a>
     </div>
-</header>
+    <div>
+        <span mat-button [matMenuTriggerFor]="menu">
+            ▽
+        </span>
+        <mat-menu #menu="matMenu">
+            <button *ngIf="isSmartPhone" mat-menu-item>Page1</button>
+            <button *ngIf="isSmartPhone" mat-menu-item>Page2</button>
+            <button *ngIf="isSmartPhone" mat-menu-item>Page3</button>
+            <button *ngIf="isSmartPhone" mat-menu-item>Page4</button>
+            <button (click)="logout()" mat-menu-item>Logout</button>
+        </mat-menu>
+    </div>
+</nav>

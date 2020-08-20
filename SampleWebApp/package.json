@@ -22,6 +22,8 @@
     "@angular/platform-browser": "~10.0.3",
     "@angular/platform-browser-dynamic": "~10.0.3",
     "@angular/router": "~10.0.3",
+    "amazon-cognito-identity-js": "^4.3.3",
+    "aws-sdk": "^2.714.2",
     "bootstrap": "^4.5.0",
     "moment": "^2.27.0",
     "rxjs": "~6.5.5",
