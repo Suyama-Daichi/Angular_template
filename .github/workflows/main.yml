@@ -15,9 +15,9 @@ FrontDeploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
     - name: setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
         node-version: 12.x
         registry-url: 'https://registry.npmjs.org'
