@@ -18,11 +18,9 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: | 
-          cd SampleWebApp
           npm install
       - name: Build
         run: |
-          cd SampleWebApp
           npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
