@@ -100,27 +100,6 @@ input {
     margin: 0;
 }
 
-form > div > button {
-    box-sizing: inherit;
-    padding: 0;
-    -webkit-appearance: button;
-    overflow: visible;
-    font-family: inherit;
-    font-style: inherit;
-    font-weight: inherit;
-    touch-action: manipulation;
-    outline: 0;
-    min-height: 1.5em;
-    display: block;
+.button > button {
     width: 100%;
-    line-height: 48px;
-    font-size: 14px;
-    border-radius: 4px;
-    transition: all ease-out 0.3s;
-    cursor: pointer;
-    text-align: center;
-    background: #ea352d;
-    border: 1px solid #ea352d;
-    color: #fff;
-    margin: 24px 0 0;
 }
