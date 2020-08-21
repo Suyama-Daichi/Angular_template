@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: dist/SampleWebApp
+          path: SampleWebApp/dist/SampleWebApp
   deploy:
     name: Deploy
     needs: build
@@ -40,7 +40,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: dist/SampleWebApp
+          path: SampleWebApp/dist/SampleWebApp
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
