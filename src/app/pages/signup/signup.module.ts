@@ -1,4 +1,4 @@
-import { ErrorComponent } from './../../components/parts/error/error.component';
+import { SharedModule } from './../../shared/shared.module';
 import { SignupComponent } from './signup.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,12 +9,12 @@ import { ConfirmAccountComponent } from './confirm-account/confirm-account.compo
 
 @NgModule({
   declarations: [
-    ErrorComponent,
     SignupComponent,
     ConfirmAccountComponent
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     FormsModule,
     SignupRoutingModule
