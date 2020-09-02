@@ -10,6 +10,7 @@ export class FormFieldComponent implements OnInit {
   @Input() id: string;
   @Input() name: string;
   @Input() fieldType: 'input' | 'select' | 'datePicker';
+  @Input('inputType') type: string;
   @Input() all: boolean;
   @Input() options: Option[];
   @Input() value: FormControl = new FormControl();
