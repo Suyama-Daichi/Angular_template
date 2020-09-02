@@ -1,0 +1,23 @@
+<div class="label">
+    <label [for]="id">{{name}}</label>
+</div>
+
+<div *ngIf="fieldType==='input'">
+    <input type="text" [id]="id" class="form-control" [formControl]="value">
+</div>
+
+<div *ngIf="fieldType==='select'">
+    <select [name]="id" [id]="id" class="form-control" [formControl]="value">
+        <option value=null *ngIf="all">全て</option>
+        <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
+    </select>
+</div>
+
+<div *ngIf="fieldType==='datePicker'">
+    <mat-form-field appearance="fill">
+        <mat-label>選択してください</mat-label>
+        <input matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="value">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>

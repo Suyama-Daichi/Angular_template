@@ -1,7 +1,2 @@
-<p>home works!</p>
-<mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<app-form-field [id]="'fieldA'" [name]="'フィールドA'" [fieldType]="'input'"></app-form-field>
+<app-form-field [id]="'fieldB'" [name]="'日付選択'" [fieldType]="'datePicker'"></app-form-field>

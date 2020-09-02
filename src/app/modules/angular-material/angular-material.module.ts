@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
@@ -23,7 +22,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule,
     MatDialogModule,
     MatPaginatorModule,
     MatProgressBarModule,
@@ -39,7 +37,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule,
     MatDialogModule,
     MatPaginatorModule,
     MatProgressBarModule,
