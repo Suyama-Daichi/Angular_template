@@ -6,23 +6,29 @@ name: CI
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
   build:
+    # タスク名
     name: Build
+    # どの種類のマシンで動かすか
     runs-on: ubuntu-latest
     steps:
+      #ステップ名
       - name: Checkout Repo
+        # 使用するアクションを指定
+        # actions/はGitHubが用意しているアクション
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: | 
+        # 実行するコマンド
+        # ☆ | で複数のコマンドを実行できる
+        run: |
           npm install
       - name: Build
         run: |
           npm run build
       - name: Archive Production Artifact
+        # ビルドした成果物を一時領域に保存する
         uses: actions/upload-artifact@master
         with:
           name: dist
@@ -44,4 +50,5 @@ jobs:
         with:
           args: deploy --only hosting
         env:
+          # 事前にFirebaseのトークンを取得してGitHubのプロジェクトのSecretに保存しておく
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
