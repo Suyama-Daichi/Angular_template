@@ -1,2 +1,3 @@
-<app-form-field [id]="'fieldA'" [name]="'フィールドA'" [fieldType]="'input'"></app-form-field>
-<app-form-field [id]="'fieldB'" [name]="'日付選択'" [fieldType]="'datePicker'"></app-form-field>
+<app-form-field [id]="'fieldA'" [name]="'フィールドA'" [fieldType]="'input'" (changeValue)="catchFormData('fieldA', $event)"></app-form-field>
+<app-form-field [id]="'fieldB'" [name]="'フィールドB'" [fieldType]="'select'" [options]="options" (changeValue)="catchFormData('fieldA', $event)"></app-form-field>
+<app-form-field [id]="'fieldC'" [name]="'日付選択'" [fieldType]="'datePicker'" (changeValue)="catchFormData('fieldB', $event)"></app-form-field>

@@ -18,6 +18,7 @@ export class FormFieldComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.changeValue.emit(this.value);
     this.value.valueChanges.subscribe(s => {
       this.changeValue.emit(this.value);
     })
@@ -25,7 +26,7 @@ export class FormFieldComponent implements OnInit {
 
 }
 
-interface Option {
+export interface Option {
   value: string;
   label: string;
 }

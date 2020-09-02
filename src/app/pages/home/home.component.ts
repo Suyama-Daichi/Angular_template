@@ -1,5 +1,6 @@
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Option } from 'src/app/components/parts/form-field/form-field.component';
 
 @Component({
   selector: 'app-home',
@@ -7,15 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  formGroup: FormGroup = this.fb.group({
-    fieldA: [],
-    fieldB: []
-  });
+  options: Option[] = [
+    {value: 'OptionA', label: 'オプションA'},
+    {value: 'OptionB', label: 'オプションB'}
+  ];
+  formGroup: FormGroup = this.fb.group({});
   constructor(
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+  }
+
+  catchFormData(name: string, e: FormControl) {
+    this.formGroup.setControl(name, e);
   }
 
 }

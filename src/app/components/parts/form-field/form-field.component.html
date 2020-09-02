@@ -8,6 +8,7 @@
 
 <div *ngIf="fieldType==='select'">
     <select [name]="id" [id]="id" class="form-control" [formControl]="value">
+        <option value=null disabled>選択してください</option>
         <option value=null *ngIf="all">全て</option>
         <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
     </select>
