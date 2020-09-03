@@ -1,4 +1,1 @@
-<app-form-field [id]="'fieldA'" [name]="'フィールドA'" [fieldType]="'input'" (changeValue)="catchFormData('fieldA', $event)"></app-form-field>
-<app-form-field [id]="'fieldA'" [name]="'フィールドB'" [fieldType]="'input'" [inputType]="'number'" (changeValue)="catchFormData('fieldB', $event)"></app-form-field>
-<app-form-field [id]="'fieldB'" [name]="'フィールドC'" [fieldType]="'select'" [options]="options" (changeValue)="catchFormData('fieldC', $event)"></app-form-field>
-<app-form-field [id]="'fieldC'" [name]="'日付選択'" [fieldType]="'datePicker'" (changeValue)="catchFormData('fieldB', $event)"></app-form-field>
+<app-form-field *ngFor="let field of fields" [fieldProps]="field" (changeValue)="formInitialized(field.id, $event)"></app-form-field>
