@@ -14,7 +14,7 @@
     <select [name]="fieldProps.id" [id]="fieldProps.id" class="form-control" [formControl]="form">
         <option value=null disabled>選択してください</option>
         <option value=null *ngIf="all">全て</option>
-        <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
+        <option *ngFor="let option of fieldProps.options" [value]="option.value">{{option.label}}</option>
     </select>
 </div>
 

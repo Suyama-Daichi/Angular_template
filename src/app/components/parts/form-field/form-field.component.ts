@@ -46,6 +46,7 @@ export interface Field {
   id: string;
   name: string;
   fieldType: 'input' | 'select' | 'datePicker';
+  options?: Option[],
   inputType?: 'text' | 'number';
   required?: boolean;
   pattern?: RegExp;
