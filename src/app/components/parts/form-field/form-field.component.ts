@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -7,22 +7,27 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./form-field.component.scss']
 })
 export class FormFieldComponent implements OnInit {
-  @Input() id: string;
-  @Input() name: string;
-  @Input() fieldType: 'input' | 'select' | 'datePicker';
-  @Input('inputType') type: string;
+  @Input() fieldProps: Field;
   @Input() all: boolean;
   @Input() options: Option[];
-  @Input() value: FormControl = new FormControl();
+  @Input() form: FormControl;
   @Output() changeValue = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.changeValue.emit(this.value);
-    this.value.valueChanges.subscribe(s => {
-      this.changeValue.emit(this.value);
+    this.initForm();
+    this.changeValue.emit(this.form);
+    this.form.valueChanges.subscribe(s => {
+      this.changeValue.emit(this.form);
     })
+  }
+
+  initForm() {
+    this.form = new FormControl(null, Validators.compose([
+      this.fieldProps.required ? Validators.required : null
+    ]
+    ));
   }
 
 }
@@ -30,4 +35,15 @@ export class FormFieldComponent implements OnInit {
 export interface Option {
   value: string;
   label: string;
+}
+
+export interface Field {
+  id: string;
+  name: string;
+  fieldType: 'input' | 'select' | 'datePicker';
+  inputType?: 'text' | 'number';
+  required?: boolean;
+  pattern?: RegExp;
+  max?: number;
+  min?: number;
 }

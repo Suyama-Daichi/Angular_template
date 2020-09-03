@@ -1,23 +1,25 @@
 <div class="label">
-    <label [for]="id">{{name}}</label>
+    <label class="mb-0" [for]="fieldProps.id"><span *ngIf="fieldProps.required" style="color:crimson">*</span>{{fieldProps.name}}</label>
 </div>
 
-<div *ngIf="fieldType==='input'">
-    <input [type]="type" [id]="id" class="form-control" [formControl]="value">
+<app-error *ngIf="form.touched && form.errors?.required" [message]="'必須です'"></app-error>
+
+<div *ngIf="fieldProps.fieldType==='input'">
+    <input [type]="fieldProps.inputType" [id]="fieldProps.id" class="form-control" [formControl]="form">
 </div>
 
-<div *ngIf="fieldType==='select'">
-    <select [name]="id" [id]="id" class="form-control" [formControl]="value">
+<div *ngIf="fieldProps.fieldType==='select'">
+    <select [name]="fieldProps.id" [id]="fieldProps.id" class="form-control" [formControl]="form">
         <option value=null disabled>選択してください</option>
         <option value=null *ngIf="all">全て</option>
         <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
     </select>
 </div>
 
-<div *ngIf="fieldType==='datePicker'">
+<div *ngIf="fieldProps.fieldType==='datePicker'">
     <mat-form-field appearance="fill">
         <mat-label>選択してください</mat-label>
-        <input matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="value">
+        <input matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="form">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
