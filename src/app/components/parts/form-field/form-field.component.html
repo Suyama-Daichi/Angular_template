@@ -7,11 +7,11 @@
 <app-error *ngIf="form.dirty && form.errors?.min" [message]="fieldProps.min + minErrorMessage"></app-error>
 
 <div *ngIf="fieldProps.fieldType==='input'">
-    <input [type]="fieldProps.inputType" [id]="fieldProps.id" class="form-control" [formControl]="form">
+    <input [type]="fieldProps.inputType" [id]="fieldProps.id" [name]="fieldProps.id" class="form-control" [formControl]="form">
 </div>
 
 <div *ngIf="fieldProps.fieldType==='select'">
-    <select [name]="fieldProps.id" [id]="fieldProps.id" class="form-control" [formControl]="form">
+    <select [id]="fieldProps.id" [name]="fieldProps.id" class="form-control" [formControl]="form">
         <option value=null disabled>選択してください</option>
         <option value=null *ngIf="all">全て</option>
         <option *ngFor="let option of fieldProps.options" [value]="option.value">{{option.label}}</option>
@@ -21,7 +21,7 @@
 <div *ngIf="fieldProps.fieldType==='datePicker'">
     <mat-form-field appearance="fill">
         <mat-label>選択してください</mat-label>
-        <input matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="form">
+        <input [id]="fieldProps.id" [name]="fieldProps.id" readonly matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="form">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
