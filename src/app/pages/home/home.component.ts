@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ];
   fields: Field[] = [
     { id: 'fieldA', name: '入力A', fieldType: 'input', inputType: 'text', required: true },
-    { id: 'fieldB', name: '入力B', fieldType: 'input', inputType: 'number' }
+    { id: 'fieldB', name: '入力B', fieldType: 'input', inputType: 'number', max: 5, min: -1 }
   ]
   formGroup: FormGroup = this.fb.group({});
   constructor(

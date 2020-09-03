@@ -2,7 +2,9 @@
     <label class="mb-0" [for]="fieldProps.id"><span *ngIf="fieldProps.required" style="color:crimson">*</span>{{fieldProps.name}}</label>
 </div>
 
-<app-error *ngIf="form.touched && form.errors?.required" [message]="'必須です'"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.required" [message]="'必須です'"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.max" [message]="fieldProps.max + maxErrorMessage"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.min" [message]="fieldProps.min + minErrorMessage"></app-error>
 
 <div *ngIf="fieldProps.fieldType==='input'">
     <input [type]="fieldProps.inputType" [id]="fieldProps.id" class="form-control" [formControl]="form">

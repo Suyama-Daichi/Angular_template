@@ -12,7 +12,9 @@ export class FormFieldComponent implements OnInit {
   @Input() options: Option[];
   @Input() form: FormControl;
   @Output() changeValue = new EventEmitter();
-
+  maxErrorMessage: string = `以下で入力してください`
+  minErrorMessage: string = `以上で入力してください`
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -25,7 +27,10 @@ export class FormFieldComponent implements OnInit {
 
   initForm() {
     this.form = new FormControl(null, Validators.compose([
-      this.fieldProps.required ? Validators.required : null
+      this.fieldProps.required ? Validators.required : null,
+      this.fieldProps.pattern ? Validators.pattern(this.fieldProps.pattern) : null,
+      this.fieldProps.max ? Validators.max(this.fieldProps.max) : null,
+      this.fieldProps.min ? Validators.min(this.fieldProps.min) : null
     ]
     ));
   }
