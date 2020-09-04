@@ -1,0 +1,29 @@
+<div class="label">
+    <label class="mb-0" [for]="fieldProps.id"><span *ngIf="fieldProps.required" style="color:crimson">*</span>{{fieldProps.name}}</label>
+</div>
+
+<app-error *ngIf="form.dirty && form.errors?.required" [message]="'必須です'"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.pattern" [message]="fieldProps.pattern.patternName + 'で入力してください'"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.max" [message]="fieldProps.max + maxErrorMessage"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.min" [message]="fieldProps.min + minErrorMessage"></app-error>
+
+<div *ngIf="fieldProps.fieldType==='input'">
+    <input [type]="fieldProps.inputType" [id]="fieldProps.id" [name]="fieldProps.id" class="form-control" [formControl]="form">
+</div>
+
+<div *ngIf="fieldProps.fieldType==='select'">
+    <select [id]="fieldProps.id" [name]="fieldProps.id" class="form-control" [formControl]="form">
+        <option value=null disabled>選択してください</option>
+        <option value=null *ngIf="all">全て</option>
+        <option *ngFor="let option of fieldProps.options" [value]="option.value">{{option.label}}</option>
+    </select>
+</div>
+
+<div *ngIf="fieldProps.fieldType==='datePicker'">
+    <mat-form-field appearance="fill">
+        <mat-label>選択してください</mat-label>
+        <input [id]="fieldProps.id" [name]="fieldProps.id" readonly matInput [matDatepicker]="picker" (click)="picker.open()" [formControl]="form">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
