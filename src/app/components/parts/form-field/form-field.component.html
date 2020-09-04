@@ -3,6 +3,7 @@
 </div>
 
 <app-error *ngIf="form.dirty && form.errors?.required" [message]="'必須です'"></app-error>
+<app-error *ngIf="form.dirty && form.errors?.pattern" [message]="fieldProps.pattern.patternName + 'で入力してください'"></app-error>
 <app-error *ngIf="form.dirty && form.errors?.max" [message]="fieldProps.max + maxErrorMessage"></app-error>
 <app-error *ngIf="form.dirty && form.errors?.min" [message]="fieldProps.min + minErrorMessage"></app-error>
 

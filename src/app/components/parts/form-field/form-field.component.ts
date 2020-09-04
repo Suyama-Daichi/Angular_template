@@ -28,7 +28,7 @@ export class FormFieldComponent implements OnInit {
   initForm() {
     this.form = new FormControl(null, Validators.compose([
       this.fieldProps.required ? Validators.required : null,
-      this.fieldProps.pattern ? Validators.pattern(this.fieldProps.pattern) : null,
+      this.fieldProps.pattern ? Validators.pattern(this.fieldProps.pattern.pattern) : null,
       this.fieldProps.max ? Validators.max(this.fieldProps.max) : null,
       this.fieldProps.min ? Validators.min(this.fieldProps.min) : null
     ]
@@ -49,7 +49,12 @@ export interface Field {
   options?: Option[],
   inputType?: 'text' | 'number';
   required?: boolean;
-  pattern?: RegExp;
+  pattern?: Pattern;
   max?: number;
   min?: number;
+}
+
+interface Pattern {
+  patternName: string;
+  pattern: RegExp;
 }
