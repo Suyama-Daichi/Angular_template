@@ -11,6 +11,7 @@ import { MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { JPDateAdapter } from './shared/jp-date-adapter';
 import { ForgotPasswordComponent } from './pages/login/forgot-password/forgot-password.component';
 import { FormFieldComponent } from './components/parts/form-field/form-field.component';
+import { ConfirmComponent } from './components/dialog/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormFieldComponent } from './components/parts/form-field/form-field.com
     HeaderComponent,
     FooterComponent,
     ForgotPasswordComponent,
-    FormFieldComponent
+    FormFieldComponent,
+    ConfirmComponent
   ],
   imports: [
     SharedModule,

@@ -1,8 +1,10 @@
+import { ConfirmComponent } from './../../components/dialog/confirm/confirm.component';
 import { Static } from 'src/app/static';
 import { Field } from './../../components/parts/form-field/form-field.component';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Option } from 'src/app/components/parts/form-field/form-field.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +26,8 @@ export class HomeComponent implements OnInit {
   formGroup: FormGroup = this.fb.group({});
   constructor(
     private fb: FormBuilder,
-    private statics: Static
+    private statics: Static,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +39,10 @@ export class HomeComponent implements OnInit {
 
 
   submit() {
-    console.log(this.formGroup.value);
+    this.dialog.open(ConfirmComponent, {data: {title: '送信しますか？'}}).afterClosed()
+    .subscribe((s: boolean) => {
+      console.log(this.formGroup.value);
+    });
   }
 
 }
