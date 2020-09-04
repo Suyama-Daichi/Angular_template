@@ -14,7 +14,7 @@ import { ConfirmAccountComponent } from './confirm-account/confirm-account.compo
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    // SharedModule,
     ReactiveFormsModule,
     FormsModule,
     SignupRoutingModule

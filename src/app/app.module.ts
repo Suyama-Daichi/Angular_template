@@ -1,3 +1,4 @@
+import { ErrorComponent } from './components/parts/error/error.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../app/shared/shared.module'
 import { SignupModule } from '../app/pages/signup/signup.module'
@@ -22,7 +23,8 @@ import { ConfirmComponent } from './components/dialog/confirm/confirm.component'
     FooterComponent,
     ForgotPasswordComponent,
     FormFieldComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ErrorComponent
   ],
   imports: [
     SharedModule,
