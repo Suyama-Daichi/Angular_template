@@ -26,7 +26,6 @@
     "amazon-cognito-identity-js": "^4.3.3",
     "aws-sdk": "^2.714.2",
     "bootstrap": "^4.5.0",
-    "moment": "^2.27.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

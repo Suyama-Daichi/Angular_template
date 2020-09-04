@@ -1,7 +1,6 @@
-<p>home works!</p>
-<mat-form-field appearance="fill">
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<form (ngSubmit)="submit()">
+    <app-form-field *ngFor="let field of fields" [fieldProps]="field" (changeValue)="formInitialized(field.id, $event)">
+    </app-form-field>
+    
+    <button mat-flat-button color="primary">送信</button>
+</form>
