@@ -16,10 +16,10 @@ export class HomeComponent implements OnInit {
   ];
   fields: Field[] = [
     { id: 'fieldA', name: '入力A', fieldType: 'input', inputType: 'text', required: true },
-    { id: 'fieldA', name: '入力B', fieldType: 'input', inputType: 'text', required: true, pattern: { patternName: 'カタカナ', pattern: this.statics.zenkakuKana } },
-    { id: 'fieldB', name: '入力C', fieldType: 'input', inputType: 'number', max: 5, min: -1 },
-    { id: 'fieldC', name: '入力D', fieldType: 'select', options: this.options },
-    { id: 'fieldD', name: '入力E', fieldType: 'datePicker' }
+    { id: 'fieldB', name: '入力B', fieldType: 'input', inputType: 'text', required: true, pattern: { patternName: 'カタカナ', pattern: this.statics.zenkakuKana } },
+    { id: 'fieldC', name: '入力C', fieldType: 'input', inputType: 'number', max: 5, min: -1 },
+    { id: 'fieldD', name: '入力D', fieldType: 'select', options: this.options },
+    { id: 'fieldE', name: '入力E', fieldType: 'datePicker' }
   ]
   formGroup: FormGroup = this.fb.group({});
   constructor(
@@ -32,6 +32,11 @@ export class HomeComponent implements OnInit {
 
   formInitialized(name: string, e: FormControl) {
     this.formGroup.setControl(name, e);
+  }
+
+
+  submit() {
+    console.log(this.formGroup.value);
   }
 
 }
