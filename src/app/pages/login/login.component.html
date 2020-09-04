@@ -28,7 +28,7 @@
                         class="login-input-text input-default">
                 </div>
                 <div class="button">
-                    <button type="submit" class="login-submit btn btn-primary">ログイン</button>
+                    <button [disabled]="loginInput.invalid" type="submit" class="login-submit btn btn-primary">ログイン</button>
                 </div>
                 <a [routerLink]="'/forgot_password'">パスワードをお忘れの方</a>
                 <div class="button login-no-account">
