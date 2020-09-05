@@ -6,13 +6,9 @@ import { AngularMaterialModule } from '../modules/angular-material/angular-mater
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 
-import { ErrorComponent } from './../components/parts/error/error.component';
-
-
 
 @NgModule({
   declarations: [
-    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +27,6 @@ import { ErrorComponent } from './../components/parts/error/error.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    ErrorComponent
   ]
 })
 export class SharedModule { }
