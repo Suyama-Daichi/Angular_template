@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "samplewebapp-b6524": {
+      "hosting": {
+        "SampleWebAppFirebase": [
+          "samplewebapp-b6524"
+        ]
+      }
+    }
+  }
+}
