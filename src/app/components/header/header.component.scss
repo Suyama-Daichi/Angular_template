@@ -11,7 +11,8 @@
     font-weight: 600;
 }
 
-.toolbar img {
+.toolbar img,
+.toolbar div {
     margin: 0 16px;
 }
 
@@ -22,6 +23,10 @@
 
 .toolbar #twitter-logo:hover {
     opacity: 0.8;
+}
+
+.toolbar .action {
+    cursor: pointer;
 }
 
 .spacer {
