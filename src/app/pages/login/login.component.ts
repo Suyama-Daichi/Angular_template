@@ -8,13 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private firebaseAuth: FirebaseAuthService) { }
+  constructor(public firebaseAuth: FirebaseAuthService) { }
 
   ngOnInit(): void {
-  }
-
-  loginWithGoogle() {
-    this.firebaseAuth.loginWithGoogle()
   }
 
 }
