@@ -5,15 +5,16 @@ import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseAuthService {
   user: Observable<User | null>;
   constructor(
-    private firebaseAuth: AngularFireAuth,
     private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore
+    private afStore: AngularFirestore,
+    private router: Router
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap((user: { uid: string; }) => {
@@ -26,8 +27,13 @@ export class FirebaseAuthService {
     )
   }
 
+  /** Googleログイン */
   loginWithGoogle(): void {
-    this.firebaseAuth.signInWithPopup(new auth.GoogleAuthProvider())
+    this.login(new auth.GoogleAuthProvider());
+  }
+
+  login(provider: auth.AuthProvider) {
+    this.afAuth.signInWithPopup(provider)
       .then(t => {
         console.log(t);
         this.updateUserData(t.user)
@@ -36,7 +42,17 @@ export class FirebaseAuthService {
         console.log(e);
       })
   }
+  logout() {
+    this.afAuth.signOut()
+      .then(() => {
+        this.router.navigate(['/login']);
+      });
+  }
 
+  /**
+   * Firestoreにユーザー情報を保存
+   * @param user ユーザーデータ
+   */
   private updateUserData(user: User) {
     const docUser: AngularFirestoreDocument<User> = this.afStore.doc(`users/${user.uid}`);
     const data: User = {
