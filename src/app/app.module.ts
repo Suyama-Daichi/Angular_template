@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FirebaseModuleModule
+    FirebaseModuleModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

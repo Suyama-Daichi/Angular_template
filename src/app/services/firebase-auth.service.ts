@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,9 +43,16 @@ export class FirebaseAuthService {
         console.log(e);
       })
   }
+
+  /** Foursquareでログイン */
+  loginWithFoursquare() {
+    console.log(`${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`);
+    location.href = `${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`;
+  }
   logout() {
     this.afAuth.signOut()
       .then(() => {
+        localStorage.removeItem('token');
         this.router.navigate(['/login']);
       });
   }
