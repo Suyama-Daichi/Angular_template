@@ -22,6 +22,6 @@ export class LoginComponent implements OnInit {
     }
   }
   GetAccessToken(code: string) {
-    this.foursqure.GetAccessTokenObservable(code);
+    this.foursqure.GetAccessToken(code);
   }
 }
