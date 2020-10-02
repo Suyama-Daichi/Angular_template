@@ -13,7 +13,7 @@ export class FoursquareService {
     this.httpClient.get<AccessToken>(`${environment.backEndApi}/authenticate?code=${code}`).subscribe(
       (response: AccessToken) => {
         localStorage.setItem('token', response.access_token);
-      });;
+      });
   }
 }
 export interface AccessToken {
