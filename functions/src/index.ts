@@ -15,7 +15,7 @@ export async function handler(event: APIGatewayEvent, context?: Context): Promis
         return {
             isBase64Encoded: false,
             statusCode: 200,
-            headers: {},
+            headers: { "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify({
                 token: customToken
             })
@@ -24,7 +24,7 @@ export async function handler(event: APIGatewayEvent, context?: Context): Promis
         return {
             isBase64Encoded: false,
             statusCode: 500,
-            headers: {},
+            headers: { "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify({
                 message: error
             })
