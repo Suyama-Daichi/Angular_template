@@ -42,13 +42,12 @@ export class FirebaseAuthService {
    * @param token ユーザートークン
    * @param userData Foursquareから取得したユーザー情報
    */
-  loginWithFoursquare(token: string, userData: UserFull): Promise<boolean> {
-    console.log(token)
+  loginWithFoursquare(token: string, userData: UserFull, fsToken: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.afAuth.signInWithCustomToken(token)
         .then(t => {
           t.user.updateEmail(userData.contact.email);
-          this.updateUserData(t.user)
+          this.updateUserData(userData, fsToken)
           resolve(true);
           console.log(t)
         })
@@ -72,7 +71,6 @@ export class FirebaseAuthService {
 
   /** Foursquareのログインページに遷移 */
   toFoursquareAuthPage() {
-    console.log(`${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`);
     location.href = `${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`;
   }
 
@@ -97,14 +95,16 @@ export class FirebaseAuthService {
    * Firestoreにユーザー情報を保存
    * @param user ユーザーデータ
    */
-  private updateUserData(user: User) {
-    const docUser: AngularFirestoreDocument<User> = this.afStore.doc(`users/${user.uid}`);
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName || '',
-      photoURL: user.photoURL || '',
-      profile: user.profile || ''
+  private updateUserData(user: any, accessToken?: string) {
+    const docUser: AngularFirestoreDocument = this.afStore.doc(`users/${user.uid ? user.uid : user.id}`);
+    console.log(user)
+    const data = {
+      uid: user.uid ? user.uid : user.id,
+      email: user.contact.email,
+      displayName: user.firstName + user.lastName || '',
+      photoURL: user.photo.prefix + '200x200' + user.photo.suffix || '',
+      profile: user.bio || '',
+      accessToken: accessToken
     };
     return docUser.set(data);
   }

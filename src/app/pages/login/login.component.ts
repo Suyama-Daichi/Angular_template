@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       async (response: AccessToken) => {
         localStorage.setItem('token', response.access_token);
         const fsUser = await this.foursqure.GetUserData(response.access_token);
-        if (await this.firebaseAuth.loginWithFoursquare((await this.firebaseAuth.ExchangeCustomToken(response.access_token).toPromise()).token, fsUser.response.user)) {
+        if (await this.firebaseAuth.loginWithFoursquare((await this.firebaseAuth.ExchangeCustomToken(fsUser.response.user.id).toPromise()).token, fsUser.response.user, response.access_token)) {
           this.router.navigateByUrl('/dashboard');
         }
       }
