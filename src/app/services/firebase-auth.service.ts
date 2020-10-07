@@ -69,11 +69,6 @@ export class FirebaseAuthService {
       })
   }
 
-  /** Foursquareのログインページに遷移 */
-  toFoursquareAuthPage() {
-    location.href = `${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`;
-  }
-
   /**
    * ユーザートークンをFirebaseのアクセストークンに変換
    * @param fsUserToken Foursquareから取得したユーザートークン

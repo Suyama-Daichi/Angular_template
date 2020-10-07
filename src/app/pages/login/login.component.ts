@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     public firebaseAuth: FirebaseAuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private foursqure: FoursquareService
+    public foursqure: FoursquareService
   ) { }
 
   ngOnInit(): void {

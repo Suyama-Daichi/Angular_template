@@ -14,6 +14,11 @@ export class FoursquareService {
     private firebaseAuth: FirebaseAuthService
   ) { }
 
+  /** Foursquareのログインページに遷移 */
+  toFoursquareAuthPage() {
+    location.href = `${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`;
+  }
+
   GetAccessToken(code: string) {
     return this.httpClient.get<AccessToken>(`${environment.backEndApi}/authenticate?code=${code}`)
   }
