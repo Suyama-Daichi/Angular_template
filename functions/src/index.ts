@@ -11,7 +11,7 @@ admin.initializeApp({
 })
 export async function handler(event: APIGatewayEvent, context?: Context): Promise<Response> {
     try {
-        const customToken = await admin.auth().createCustomToken(JSON.parse(event.body as string).fsUserToken)
+        const customToken = await admin.auth().createCustomToken(JSON.parse(event.body as string).fsUserId)
         return {
             isBase64Encoded: false,
             statusCode: 200,

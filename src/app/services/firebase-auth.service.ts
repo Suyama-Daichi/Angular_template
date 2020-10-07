@@ -70,11 +70,11 @@ export class FirebaseAuthService {
   }
 
   /**
-   * ユーザートークンをFirebaseのアクセストークンに変換
-   * @param fsUserToken Foursquareから取得したユーザートークン
+   * ユーザーIDをFirebaseのアクセストークンに変換
+   * @param fsUserId Foursquareから取得したユーザートークン
    */
-  ExchangeCustomToken(fsUserToken: string) {
-    return this.http.post<CustumToken>(environment.backEndApi + '/token', { fsUserToken: fsUserToken });
+  ExchangeCustomToken(fsUserId: string) {
+    return this.http.post<CustumToken>(environment.backEndApi + '/token', { fsUserId: fsUserId });
   }
 
   /** ログアウト */
