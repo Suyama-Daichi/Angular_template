@@ -202,9 +202,6 @@ interface Source {
 
 interface ContactFull extends Contact {
     verifiedPhone: string;
-    email?: string;
-    twitter?: string;
-    facebook?: string;
 }
 
 interface Friends {
