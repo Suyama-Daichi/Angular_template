@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+// import * as admin from 'firebase-admin';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
@@ -7,6 +9,7 @@ import { User } from '../models/user';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { UserFull } from '../models/foursquare/foursquare-user';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +18,8 @@ export class FirebaseAuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap((user: { uid: string; }) => {
@@ -33,6 +37,28 @@ export class FirebaseAuthService {
     this.login(new auth.GoogleAuthProvider());
   }
 
+  /**
+   * Foursquareでログイン
+   * @param token ユーザートークン
+   * @param userData Foursquareから取得したユーザー情報
+   */
+  loginWithFoursquare(token: string, userData: UserFull): Promise<boolean> {
+    console.log(token)
+    return new Promise((resolve, reject) => {
+      this.afAuth.signInWithCustomToken(token)
+        .then(t => {
+          t.user.updateEmail(userData.contact.email);
+          this.updateUserData(t.user)
+          resolve(true);
+          console.log(t)
+        })
+        .catch(e => {
+          reject(false);
+          console.log(e)
+        })
+    });
+  }
+
   login(provider: auth.AuthProvider) {
     this.afAuth.signInWithPopup(provider)
       .then(t => {
@@ -44,11 +70,21 @@ export class FirebaseAuthService {
       })
   }
 
-  /** Foursquareでログイン */
-  loginWithFoursquare() {
+  /** Foursquareのログインページに遷移 */
+  toFoursquareAuthPage() {
     console.log(`${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`);
     location.href = `${environment.foursquare.authenticateURL}?client_id=${environment.foursquare.clientId}&redirect_uri=${environment.foursquare.redirectUrl}&response_type=code`;
   }
+
+  /**
+   * ユーザートークンをFirebaseのアクセストークンに変換
+   * @param fsUserToken Foursquareから取得したユーザートークン
+   */
+  ExchangeCustomToken(fsUserToken: string) {
+    return this.http.post<CustumToken>(environment.backEndApi + '/token', { fsUserToken: fsUserToken });
+  }
+
+  /** ログアウト */
   logout() {
     this.afAuth.signOut()
       .then(() => {
@@ -72,4 +108,8 @@ export class FirebaseAuthService {
     };
     return docUser.set(data);
   }
+}
+
+export interface CustumToken {
+  token: string;
 }

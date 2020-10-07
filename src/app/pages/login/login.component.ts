@@ -1,7 +1,9 @@
-import { FoursquareService } from './../../services/foursquare.service';
+import { AccessToken, FoursquareService } from './../../services/foursquare.service';
 import { FirebaseAuthService } from './../../services/firebase-auth.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +15,24 @@ export class LoginComponent implements OnInit {
   constructor(
     public firebaseAuth: FirebaseAuthService,
     private route: ActivatedRoute,
+    private router: Router,
     private foursqure: FoursquareService
   ) { }
 
   ngOnInit(): void {
     if (this.route.snapshot.queryParamMap.get('code')) {
-      this.GetAccessToken(this.route.snapshot.queryParamMap.get('code'));
+      this.GetCustomToken(this.route.snapshot.queryParamMap.get('code'));
     }
   }
-  GetAccessToken(code: string) {
-    this.foursqure.GetAccessToken(code);
+  GetCustomToken(code: string) {
+    this.foursqure.GetAccessToken(code).subscribe(
+      async (response: AccessToken) => {
+        localStorage.setItem('token', response.access_token);
+        const fsUser = await this.foursqure.GetUserData(response.access_token);
+        if (await this.firebaseAuth.loginWithFoursquare((await this.firebaseAuth.ExchangeCustomToken(response.access_token).toPromise()).token, fsUser.response.user)) {
+          this.router.navigateByUrl('/dashboard');
+        }
+      }
+    );
   }
 }

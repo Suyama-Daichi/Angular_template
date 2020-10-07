@@ -11,6 +11,7 @@ export const environment = {
   },
   foursquare: {
     authenticateURL: 'https://foursquare.com/oauth2/authenticate',
+    endpoint: 'https://api.foursquare.com/v2',
     redirectUrl: 'http://localhost:4200/login',
     clientId: '1DSKDVJVFM3FHGAREG1LUY2NWJVX452M0UVDO1KAAIVCMVZ5'
   },
