@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-// import * as admin from 'firebase-admin';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
@@ -10,6 +9,7 @@ import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserFull } from '../models/foursquare/foursquare-user';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,7 +47,15 @@ export class FirebaseAuthService {
       this.afAuth.signInWithCustomToken(token)
         .then(t => {
           t.user.updateEmail(userData.contact.email);
-          this.updateUserData(userData, fsToken)
+          const model = {
+            uid: userData.id,
+            email: userData.contact.email,
+            displayName: userData.lastName + userData.firstName || '',
+            photoURL: userData.photo.prefix + '200x200' + userData.photo.suffix || '',
+            profile: userData?.bio || '',
+            accessToken: fsToken
+          }
+          this.updateUserData(model)
           resolve(true);
           console.log(t)
         })
@@ -58,11 +66,19 @@ export class FirebaseAuthService {
     });
   }
 
+  linkProvider(provider: auth.AuthProvider) {
+    this.afAuth.currentUser
+      .then(t => {
+        t.linkWithPopup(provider)
+        console.log(t)
+      })
+  }
+
   login(provider: auth.AuthProvider) {
     this.afAuth.signInWithPopup(provider)
       .then(t => {
-        console.log(t);
-        this.updateUserData(t.user)
+        console.log(t)
+        this.router.navigateByUrl('/dashboard');
       })
       .catch(e => {
         console.log(e);
@@ -90,18 +106,9 @@ export class FirebaseAuthService {
    * Firestoreにユーザー情報を保存
    * @param user ユーザーデータ
    */
-  private updateUserData(user: any, accessToken?: string) {
+  private updateUserData(user: any) {
     const docUser: AngularFirestoreDocument = this.afStore.doc(`users/${user.uid ? user.uid : user.id}`);
-    console.log(user)
-    const data = {
-      uid: user.uid ? user.uid : user.id,
-      email: user.contact.email,
-      displayName: user.firstName + user.lastName || '',
-      photoURL: user.photo.prefix + '200x200' + user.photo.suffix || '',
-      profile: user.bio || '',
-      accessToken: accessToken
-    };
-    return docUser.set(data);
+    return docUser.set(user);
   }
 }
 
