@@ -1,7 +1,7 @@
-import { Router } from '@angular/router';
-import { CognitoService } from './../../services/cognito.service';
+import { AccessToken, FoursquareService } from './../../services/foursquare.service';
+import { FirebaseAuthService } from './../../services/firebase-auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,36 +9,27 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginInput: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private cognito: CognitoService,
-    private router: Router
-  ) {
-    this.initForm();
-  }
-
-  initForm() {
-    this.loginInput = this.fb.group(
-      {
-        email: [null, Validators.compose([Validators.required, Validators.email])],
-        password: [null, Validators.required]
-      }
-    );
-  }
+    public firebaseAuth: FirebaseAuthService,
+    private route: ActivatedRoute,
+    private router: Router,
+    public foursqure: FoursquareService
+  ) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.queryParamMap.get('code')) {
+      this.GetCustomToken(this.route.snapshot.queryParamMap.get('code'));
+    }
   }
-  async loginSubmit() {
-    const res = await this.cognito.login(this.loginInput.get('email').value, this.loginInput.get('password').value)
-      .catch(() => {
-        alert('ログインに失敗しました');
-      });
-
-      if (res) {
-        console.log(res);
-        this.router.navigateByUrl('home');
+  GetCustomToken(code: string) {
+    this.foursqure.GetAccessToken(code).subscribe(
+      async (response: AccessToken) => {
+        const fsUser = await this.foursqure.GetUserData(response.access_token);
+        if (await this.firebaseAuth.loginWithFoursquare((await this.firebaseAuth.ExchangeCustomToken(fsUser.response.user.id).toPromise()).token, fsUser.response.user, response.access_token)) {
+          this.router.navigateByUrl('/dashboard');
+        }
       }
+    );
   }
 }

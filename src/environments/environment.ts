@@ -1,21 +1,19 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
-  aws: {
-    region: 'ap-northeast-1',
-    userPoolId: 'ap-northeast-1_uNQxCzlRD', // User Pools の画面から取得できる User Pools ID。
-    clientId: '5tnkcas1c402ra0kl3da4gv37v',  // User Pools で発行したクライアントアプリケーションのID。
-  }
+  firebase: {
+    apiKey: "AIzaSyAghOuLClI4Zu3tg_0qA8kfcAja5fdWgOg",
+    authDomain: "samplewebapp-b6524.firebaseapp.com",
+    databaseURL: "https://samplewebapp-b6524.firebaseio.com",
+    projectId: "samplewebapp-b6524",
+    storageBucket: "samplewebapp-b6524.appspot.com",
+    messagingSenderId: "5223617968",
+    appId: "1:5223617968:web:3e2bf10207968e91897275"
+  },
+  foursquare: {
+    authenticateURL: 'https://foursquare.com/oauth2/authenticate',
+    endpoint: 'https://api.foursquare.com/v2',
+    redirectUrl: 'http://localhost:4200/login',
+    clientId: '1DSKDVJVFM3FHGAREG1LUY2NWJVX452M0UVDO1KAAIVCMVZ5'
+  },
+  backEndApi: 'https://1vxd5j4ny1.execute-api.ap-northeast-1.amazonaws.com/prod'
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

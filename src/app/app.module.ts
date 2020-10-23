@@ -1,37 +1,28 @@
+import { FirebaseModuleModule } from './modules/firebase-module/firebase-module.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../app/shared/shared.module'
-import { SignupModule } from '../app/pages/signup/signup.module'
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
-import { JPDateAdapter } from './shared/jp-date-adapter';
-import { ForgotPasswordComponent } from './pages/login/forgot-password/forgot-password.component';
-import { FormFieldComponent } from './components/parts/form-field/form-field.component';
-import { ConfirmComponent } from './components/dialog/confirm/confirm.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent,
-    ForgotPasswordComponent,
-    FormFieldComponent,
-    ConfirmComponent
+    DashboardComponent
   ],
   imports: [
-    SharedModule,
-    SignupModule
+    BrowserModule,
+    AppRoutingModule,
+    FirebaseModuleModule,
+    HttpClientModule
   ],
-  providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'ja-JP' },
-    { provide: DateAdapter, useClass: JPDateAdapter }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

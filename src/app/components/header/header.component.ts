@@ -1,7 +1,5 @@
-import { Router } from '@angular/router';
-import { CognitoService } from './../../services/cognito.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatMenu } from '@angular/material/menu';
+import { Component, OnInit } from '@angular/core';
+import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,26 +7,10 @@ import { MatMenu } from '@angular/material/menu';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isSmartPhone: boolean;
-  constructor(
-    private cognito: CognitoService,
-    private router: Router
-  ) { }
+
+  constructor(public firebaseAuth: FirebaseAuthService) { }
 
   ngOnInit(): void {
-    this.isSmartPhone = window.innerWidth < 425;
   }
-
-  async logout() {
-    const res = await this.cognito.logout()
-      .catch(() => {
-        console.error('ログアウトに失敗しました')
-      });
-
-    if (res) {
-      this.router.navigateByUrl('login')
-    }
-  }
-
 
 }

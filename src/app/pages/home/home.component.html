@@ -1,6 +1,0 @@
-<form (ngSubmit)="submit()">
-    <app-form-field *ngFor="let field of fields" [fieldProps]="field" (changeValue)="formInitialized(field.id, $event)">
-    </app-form-field>
-    
-    <button mat-flat-button color="primary">送信</button>
-</form>
